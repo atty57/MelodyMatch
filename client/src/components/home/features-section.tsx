@@ -42,7 +42,7 @@ export const FeaturesSection = () => {
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
       {/* Background with depth effect */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white to-neutral-50 z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-gray-800 z-0"></div>
       
       {/* Background pattern for depth */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5 z-0"></div>
@@ -53,10 +53,10 @@ export const FeaturesSection = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
-          <span className="inline-block text-sm font-semibold text-accent bg-accent/10 py-1 px-3 rounded-full mb-3">Our Services</span>
-          <h2 className="text-3xl md:text-5xl font-bold text-gradient mb-4">Comprehensive Music Compliance Solutions</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6 rounded-full"></div>
-          <p className="mt-4 text-xl text-neutral-600 max-w-3xl mx-auto">
+          <span className="inline-block text-sm font-semibold text-white bg-primary/40 backdrop-blur-sm py-1 px-3 rounded-full mb-3">Our Services</span>
+          <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-purple-300 mb-4">Comprehensive Music Compliance Solutions</h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-purple-300 mx-auto mb-6 rounded-full"></div>
+          <p className="mt-4 text-xl text-gray-300 max-w-3xl mx-auto backdrop-blur-sm bg-black/10 p-3 rounded-xl">
             Everything you need to navigate music industry regulations
           </p>
         </div>
@@ -70,8 +70,8 @@ export const FeaturesSection = () => {
                 transition-all duration-500 flex flex-col 
                 transform hover:-translate-y-2
                 ${hoveredFeature === feature.id 
-                  ? 'z-10 scale-105 glass-card-hover shadow-glow-accent bg-white/30' 
-                  : 'bg-white/80 glass depth-2'
+                  ? 'z-10 scale-105 glass-card-hover shadow-glow-accent bg-purple-800/30 border border-purple-300/20' 
+                  : 'glass-dark depth-2 bg-gray-800/70 border border-gray-700/50'
                 }
               `}
               onMouseEnter={() => setHoveredFeature(feature.id)}
@@ -96,19 +96,19 @@ export const FeaturesSection = () => {
               <h3 className={`
                 text-2xl font-bold mb-4 
                 transition-colors duration-300
-                ${hoveredFeature === feature.id ? 'text-gradient' : 'text-primary'}
+                ${hoveredFeature === feature.id ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-white' : 'text-white'}
               `}>
                 {feature.title}
               </h3>
               
-              <p className="text-neutral-600 text-lg flex-grow mb-6">
+              <p className="text-gray-300 text-lg flex-grow mb-6">
                 {feature.description}
               </p>
               
               <Link 
                 href={`/compliance/${feature.title.toLowerCase().replace(/\s+/g, '-')}`}
                 className={`
-                  mt-auto text-accent hover:text-accent/80 
+                  mt-auto text-purple-300 hover:text-white
                   font-medium inline-flex items-center group
                 `}
               >

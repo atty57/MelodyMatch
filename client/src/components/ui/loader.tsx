@@ -24,11 +24,11 @@ export const PageLoader = ({ show }: LoaderProps) => {
   
   return (
     <div 
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-primary to-secondary transition-opacity duration-600 ${
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 transition-opacity duration-600 ${
         show ? 'opacity-100' : 'opacity-0'
       }`}
     >
-      <div className="backdrop-blur-xl bg-white/10 p-12 rounded-2xl shadow-glow border border-white/20">
+      <div className="backdrop-blur-xl bg-black/20 p-12 rounded-2xl shadow-glow border border-purple-500/20">
         <div className="flex flex-col items-center">
           <div className="relative">
             <div className="loader-orbit">
@@ -64,11 +64,13 @@ export const SectionLoader = () => {
   return (
     <div className="flex items-center justify-center p-8">
       <div className="relative">
-        <div className="h-12 w-12 rounded-full border-4 border-neutral-200 border-t-primary animate-spin"></div>
+        <div className="absolute -inset-4 bg-purple-500/10 rounded-full animate-pulse-glow"></div>
+        <div className="h-16 w-16 rounded-full border-4 border-gray-800 border-t-purple-500 animate-spin"></div>
         <div className="absolute inset-0 flex items-center justify-center">
-          <Music className="h-5 w-5 text-primary animate-pulse" />
+          <Music className="h-6 w-6 text-purple-400 animate-pulse" />
         </div>
       </div>
+      <div className="ml-4 text-gray-300 text-sm font-medium animate-pulse">Loading...</div>
     </div>
   );
 };

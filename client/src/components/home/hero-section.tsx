@@ -24,11 +24,16 @@ export const HeroSection = () => {
       
       {/* Gradient overlay with animated background */}
       <div 
-        className="absolute inset-0 bg-gradient-to-r from-primary/95 to-secondary/85 z-0 animate-gradient-x"
+        className="absolute inset-0 bg-gradient-to-r from-gray-900/98 to-gray-800/95 z-0 animate-gradient-x"
         style={{
           backgroundSize: '200% 200%',
           animation: 'gradient-animation 15s ease infinite',
         }}
+      />
+      
+      {/* Secondary gradient for more depth */}
+      <div 
+        className="absolute inset-0 bg-gradient-to-b from-primary/30 to-transparent opacity-60 z-1"
       />
       
       {/* Floating music icons */}
@@ -85,7 +90,7 @@ export const HeroSection = () => {
       
       {/* Animated wave footer */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" className="text-white animate-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" className="text-gray-900 animate-wave">
           <path fill="currentColor" fillOpacity="1" d="M0,64L80,58.7C160,53,320,43,480,48C640,53,800,75,960,80C1120,85,1280,75,1360,69.3L1440,64L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"></path>
         </svg>
       </div>
