@@ -91,13 +91,13 @@ export default function Contact() {
         </section>
         
         {/* Contact Section */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-black">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
               {/* Contact Information */}
               <div className="lg:col-span-1">
-                <h2 className="text-2xl font-bold text-primary mb-6">Get in Touch</h2>
-                <p className="text-neutral-600 mb-8">
+                <h2 className="text-2xl font-bold text-white mb-6">Get in Touch</h2>
+                <p className="text-gray-300 mb-8">
                   Our team is ready to assist with any questions about music industry compliance, our resources, or how we can help you navigate regulatory challenges.
                 </p>
                 
@@ -109,9 +109,9 @@ export default function Contact() {
                       </div>
                     </div>
                     <div className="ml-4">
-                      <h3 className="text-lg font-semibold text-primary">Email Us</h3>
-                      <p className="text-neutral-600 mt-1">info@musicpliance.com</p>
-                      <p className="text-neutral-600">support@musicpliance.com</p>
+                      <h3 className="text-lg font-semibold text-white">Email Us</h3>
+                      <p className="text-gray-300 mt-1">info@musicpliance.com</p>
+                      <p className="text-gray-300">support@musicpliance.com</p>
                     </div>
                   </div>
                   
@@ -122,9 +122,9 @@ export default function Contact() {
                       </div>
                     </div>
                     <div className="ml-4">
-                      <h3 className="text-lg font-semibold text-primary">Call Us</h3>
-                      <p className="text-neutral-600 mt-1">+1 (555) 123-4567</p>
-                      <p className="text-neutral-600">Monday-Friday, 9am-5pm EST</p>
+                      <h3 className="text-lg font-semibold text-white">Call Us</h3>
+                      <p className="text-gray-300 mt-1">+1 (555) 123-4567</p>
+                      <p className="text-gray-300">Monday-Friday, 9am-5pm EST</p>
                     </div>
                   </div>
                   
@@ -135,10 +135,10 @@ export default function Contact() {
                       </div>
                     </div>
                     <div className="ml-4">
-                      <h3 className="text-lg font-semibold text-primary">Visit Us</h3>
-                      <p className="text-neutral-600 mt-1">123 Music Avenue</p>
-                      <p className="text-neutral-600">Nashville, TN 37203</p>
-                      <p className="text-neutral-600">United States</p>
+                      <h3 className="text-lg font-semibold text-white">Visit Us</h3>
+                      <p className="text-gray-300 mt-1">123 Music Avenue</p>
+                      <p className="text-gray-300">Nashville, TN 37203</p>
+                      <p className="text-gray-300">United States</p>
                     </div>
                   </div>
                   
@@ -149,9 +149,9 @@ export default function Contact() {
                       </div>
                     </div>
                     <div className="ml-4">
-                      <h3 className="text-lg font-semibold text-primary">Business Hours</h3>
-                      <p className="text-neutral-600 mt-1">Monday-Friday: 9:00 AM - 5:00 PM EST</p>
-                      <p className="text-neutral-600">Saturday-Sunday: Closed</p>
+                      <h3 className="text-lg font-semibold text-white">Business Hours</h3>
+                      <p className="text-gray-300 mt-1">Monday-Friday: 9:00 AM - 5:00 PM EST</p>
+                      <p className="text-gray-300">Saturday-Sunday: Closed</p>
                     </div>
                   </div>
                 </div>
@@ -159,8 +159,8 @@ export default function Contact() {
               
               {/* Contact Form */}
               <div className="lg:col-span-2">
-                <div className="bg-neutral-50 p-8 rounded-lg border border-neutral-200">
-                  <h2 className="text-2xl font-bold text-primary mb-6">Send a Message</h2>
+                <div className="glass-dark p-8 rounded-lg border border-gray-700/50 bg-gray-900/50 backdrop-blur-sm">
+                  <h2 className="text-2xl font-bold text-white mb-6">Send a Message</h2>
                   
                   <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -170,9 +170,9 @@ export default function Contact() {
                           name="name"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Your Name</FormLabel>
+                              <FormLabel className="text-gray-200">Your Name</FormLabel>
                               <FormControl>
-                                <Input placeholder="John Doe" {...field} />
+                                <Input placeholder="John Doe" {...field} className="bg-gray-800/50 border-gray-700 text-white" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -184,9 +184,9 @@ export default function Contact() {
                           name="email"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Email Address</FormLabel>
+                              <FormLabel className="text-gray-200">Email Address</FormLabel>
                               <FormControl>
-                                <Input placeholder="john@example.com" {...field} />
+                                <Input placeholder="john@example.com" {...field} className="bg-gray-800/50 border-gray-700 text-white" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -199,9 +199,9 @@ export default function Contact() {
                         name="subject"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Subject</FormLabel>
+                            <FormLabel className="text-gray-200">Subject</FormLabel>
                             <FormControl>
-                              <Input placeholder="How can we help you?" {...field} />
+                              <Input placeholder="How can we help you?" {...field} className="bg-gray-800/50 border-gray-700 text-white" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -213,11 +213,11 @@ export default function Contact() {
                         name="message"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Message</FormLabel>
+                            <FormLabel className="text-gray-200">Message</FormLabel>
                             <FormControl>
                               <Textarea 
                                 placeholder="Please describe your question or request" 
-                                className="min-h-[150px]"
+                                className="min-h-[150px] bg-gray-800/50 border-gray-700 text-white"
                                 {...field}
                               />
                             </FormControl>
@@ -242,40 +242,40 @@ export default function Contact() {
         </section>
         
         {/* FAQ Section */}
-        <section className="py-16 bg-neutral-50">
+        <section className="py-16 bg-gray-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-primary mb-4">Frequently Asked Questions</h2>
-              <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+              <h2 className="text-3xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+              <p className="text-lg text-gray-300 max-w-3xl mx-auto">
                 Find quick answers to common questions about our services and music compliance.
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              <div className="bg-white p-6 rounded-lg border border-neutral-200">
-                <h3 className="text-lg font-semibold text-primary mb-2">How quickly can I expect a response to my inquiry?</h3>
-                <p className="text-neutral-600">
+              <div className="glass-dark p-6 rounded-lg border border-gray-700/50 bg-gray-800/40 backdrop-blur-sm">
+                <h3 className="text-lg font-semibold text-white mb-2">How quickly can I expect a response to my inquiry?</h3>
+                <p className="text-gray-300">
                   We strive to respond to all inquiries within 24-48 business hours. For urgent matters, please mark your subject line as "URGENT".
                 </p>
               </div>
               
-              <div className="bg-white p-6 rounded-lg border border-neutral-200">
-                <h3 className="text-lg font-semibold text-primary mb-2">Do you offer consultations for specific compliance issues?</h3>
-                <p className="text-neutral-600">
+              <div className="glass-dark p-6 rounded-lg border border-gray-700/50 bg-gray-800/40 backdrop-blur-sm">
+                <h3 className="text-lg font-semibold text-white mb-2">Do you offer consultations for specific compliance issues?</h3>
+                <p className="text-gray-300">
                   Yes, we offer personalized consultations with our compliance experts. You can request a consultation through our contact form.
                 </p>
               </div>
               
-              <div className="bg-white p-6 rounded-lg border border-neutral-200">
-                <h3 className="text-lg font-semibold text-primary mb-2">How can I be listed in your industry directory?</h3>
-                <p className="text-neutral-600">
+              <div className="glass-dark p-6 rounded-lg border border-gray-700/50 bg-gray-800/40 backdrop-blur-sm">
+                <h3 className="text-lg font-semibold text-white mb-2">How can I be listed in your industry directory?</h3>
+                <p className="text-gray-300">
                   To be included in our directory, please fill out the contact form with "Directory Listing Request" as the subject, and we'll guide you through the process.
                 </p>
               </div>
               
-              <div className="bg-white p-6 rounded-lg border border-neutral-200">
-                <h3 className="text-lg font-semibold text-primary mb-2">Is there a cost to access your compliance resources?</h3>
-                <p className="text-neutral-600">
+              <div className="glass-dark p-6 rounded-lg border border-gray-700/50 bg-gray-800/40 backdrop-blur-sm">
+                <h3 className="text-lg font-semibold text-white mb-2">Is there a cost to access your compliance resources?</h3>
+                <p className="text-gray-300">
                   Many of our basic resources are available for free. Premium tools and in-depth guides may require a subscription. Contact us for pricing details.
                 </p>
               </div>
