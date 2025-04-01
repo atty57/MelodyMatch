@@ -102,10 +102,10 @@ export default function NotFound() {
                 variant="outline"
                 className="border-primary text-white hover:bg-primary/20 transition-all duration-300"
               >
-                <a href="javascript:history.back()">
+                <button onClick={() => window.history.back()}>
                   <MoveLeft className="mr-2 h-4 w-4" />
                   Go Back
-                </a>
+                </button>
               </Button>
             </div>
             
