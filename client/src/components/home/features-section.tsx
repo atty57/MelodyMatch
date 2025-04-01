@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'wouter';
 import { ArrowRight } from 'lucide-react';
 import { FEATURES } from '@/lib/types';
 
 export const FeaturesSection = () => {
+  const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
+
   const renderIcon = (iconName: string) => {
     return (
       <svg 
-        className="w-5 h-5" 
+        className="w-6 h-6" 
         fill="currentColor" 
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -38,34 +40,79 @@ export const FeaturesSection = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-16 md:py-24 bg-gradient-to-b from-white to-neutral-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary">Comprehensive Music Compliance Solutions</h2>
+          <span className="inline-block text-sm font-semibold text-accent bg-accent/10 py-1 px-3 rounded-full mb-3">Our Services</span>
+          <h2 className="text-3xl md:text-5xl font-bold text-gradient mb-4">Comprehensive Music Compliance Solutions</h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6 rounded-full"></div>
           <p className="mt-4 text-xl text-neutral-600 max-w-3xl mx-auto">
             Everything you need to navigate music industry regulations
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {FEATURES.map((feature) => (
+          {FEATURES.map((feature, index) => (
             <div 
               key={feature.id}
-              className="bg-neutral-50 rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col"
+              className={`
+                relative bg-white rounded-lg p-8 
+                shadow-sm hover:shadow-glow-accent 
+                transition-all duration-500 flex flex-col 
+                border border-neutral-100
+                transform hover:-translate-y-2
+                ${hoveredFeature === feature.id ? 'z-10 scale-105' : ''}
+              `}
+              onMouseEnter={() => setHoveredFeature(feature.id)}
+              onMouseLeave={() => setHoveredFeature(null)}
             >
-              <div className="flex items-center justify-center w-12 h-12 rounded-md bg-primary text-white mb-5">
+              <div 
+                className={`
+                  flex items-center justify-center w-16 h-16 
+                  rounded-2xl bg-primary text-white mb-6
+                  transition-all duration-300
+                  ${hoveredFeature === feature.id ? 'bg-gradient-to-r from-primary to-secondary transform rotate-6' : ''}
+                `}
+              >
                 {renderIcon(feature.icon)}
               </div>
-              <h3 className="text-xl font-semibold text-primary mb-3">{feature.title}</h3>
-              <p className="text-neutral-600 flex-grow">
+              
+              <div className="h-1 w-12 bg-accent/30 rounded-full mb-4"></div>
+              
+              <h3 className={`
+                text-2xl font-bold mb-4 
+                transition-colors duration-300
+                ${hoveredFeature === feature.id ? 'text-gradient' : 'text-primary'}
+              `}>
+                {feature.title}
+              </h3>
+              
+              <p className="text-neutral-600 text-lg flex-grow mb-6">
                 {feature.description}
               </p>
+              
               <Link 
                 href={`/compliance/${feature.title.toLowerCase().replace(/\s+/g, '-')}`}
-                className="mt-5 text-accent hover:text-accent/80 font-medium inline-flex items-center"
+                className={`
+                  mt-auto text-accent hover:text-accent/80 
+                  font-medium inline-flex items-center group
+                `}
               >
-                Learn more <ArrowRight className="ml-2 h-4 w-4" />
+                <span className="border-b border-transparent group-hover:border-accent transition-all duration-300">
+                  Learn more
+                </span> 
+                <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
+              
+              {/* Decorative corner element */}
+              <div className="absolute top-0 right-0 w-12 h-12 overflow-hidden">
+                <div className={`
+                  absolute transform rotate-45 bg-accent/10 
+                  w-16 h-3 top-6 -right-8
+                  transition-all duration-300
+                  ${hoveredFeature === feature.id ? 'bg-accent/30' : ''}
+                `}></div>
+              </div>
             </div>
           ))}
         </div>
