@@ -40,8 +40,18 @@ export const FeaturesSection = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-white to-neutral-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 md:py-24 relative overflow-hidden">
+      {/* Background with depth effect */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white to-neutral-50 z-0"></div>
+      
+      {/* Background pattern for depth */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-5 z-0"></div>
+      
+      {/* Decorative elements for depth */}
+      <div className="absolute top-20 right-20 w-72 h-72 bg-primary/5 rounded-full blur-3xl z-0"></div>
+      <div className="absolute bottom-10 left-10 w-80 h-80 bg-secondary/5 rounded-full blur-3xl z-0"></div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <span className="inline-block text-sm font-semibold text-accent bg-accent/10 py-1 px-3 rounded-full mb-3">Our Services</span>
           <h2 className="text-3xl md:text-5xl font-bold text-gradient mb-4">Comprehensive Music Compliance Solutions</h2>
@@ -56,12 +66,13 @@ export const FeaturesSection = () => {
             <div 
               key={feature.id}
               className={`
-                relative bg-white rounded-lg p-8 
-                shadow-sm hover:shadow-glow-accent 
+                relative rounded-xl p-8 
                 transition-all duration-500 flex flex-col 
-                border border-neutral-100
                 transform hover:-translate-y-2
-                ${hoveredFeature === feature.id ? 'z-10 scale-105' : ''}
+                ${hoveredFeature === feature.id 
+                  ? 'z-10 scale-105 glass-card-hover shadow-glow-accent bg-white/30' 
+                  : 'bg-white/80 glass depth-2'
+                }
               `}
               onMouseEnter={() => setHoveredFeature(feature.id)}
               onMouseLeave={() => setHoveredFeature(null)}
@@ -69,9 +80,12 @@ export const FeaturesSection = () => {
               <div 
                 className={`
                   flex items-center justify-center w-16 h-16 
-                  rounded-2xl bg-primary text-white mb-6
-                  transition-all duration-300
-                  ${hoveredFeature === feature.id ? 'bg-gradient-to-r from-primary to-secondary transform rotate-6' : ''}
+                  rounded-2xl text-white mb-6
+                  transition-all duration-300 glass-card
+                  ${hoveredFeature === feature.id 
+                    ? 'bg-gradient-to-r from-primary to-secondary shadow-glow-accent transform rotate-6 scale-110' 
+                    : 'bg-primary/80 backdrop-blur-lg'
+                  }
                 `}
               >
                 {renderIcon(feature.icon)}

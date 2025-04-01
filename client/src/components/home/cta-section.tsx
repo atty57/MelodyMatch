@@ -15,12 +15,21 @@ export const CTASection = () => {
     <section className="relative py-20 md:py-28 overflow-hidden">
       {/* Animated background with radial gradient */}
       <div 
-        className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-accent opacity-90"
-        style={{
-          backgroundSize: '200% 200%',
-          animation: 'gradient-animation 15s ease infinite',
-        }}
+        className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-accent opacity-90 animate-gradient-x"
       />
+      
+      {/* Depth-creating dot pattern */}
+      <div className="absolute inset-0 bg-dot-pattern opacity-10 z-1"></div>
+      
+      {/* Floating particles for depth */}
+      <div className="absolute inset-0 overflow-hidden z-1">
+        <div className="absolute h-2 w-2 rounded-full bg-white/20 top-1/4 left-1/5 animate-float"></div>
+        <div className="absolute h-3 w-3 rounded-full bg-white/30 top-3/4 left-1/3 animate-float-slow"></div>
+        <div className="absolute h-4 w-4 rounded-full bg-white/10 top-1/3 right-1/4 animate-float-reverse"></div>
+        <div className="absolute h-2 w-2 rounded-full bg-white/20 bottom-1/4 right-1/5 animate-float-slow-reverse"></div>
+        <div className="absolute h-3 w-3 rounded-full bg-white/20 top-2/3 left-1/6 animate-float-slow"></div>
+        <div className="absolute h-2 w-2 rounded-full bg-white/30 bottom-1/3 right-1/6 animate-float"></div>
+      </div>
       
       {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-white opacity-5 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/3"></div>
@@ -58,7 +67,14 @@ export const CTASection = () => {
           </div>
           
           <div className="mt-10 md:mt-0 md:w-2/5">
-            <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-glow border border-white/20 transform transition-all duration-500 hover:scale-105">
+            <div className="glass-card p-8 rounded-2xl shadow-glow-strong border border-white/20 transform transition-all duration-500 hover:scale-105 relative hardware-accelerated">
+              {/* Depth effect with inner highlight */}
+              <div className="absolute inset-0 rounded-2xl overflow-hidden">
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent"></div>
+                <div className="absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
+                <div className="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-white/50 via-transparent to-transparent"></div>
+                <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+              </div>
               <h3 className="text-2xl font-bold text-white mb-4">Start Your Compliance Journey</h3>
               <p className="text-white/80 mb-6">
                 Get access to our comprehensive suite of tools and expert resources.

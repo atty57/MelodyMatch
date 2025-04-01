@@ -89,13 +89,18 @@ export const StatsSection = () => {
             <div 
               key={stat.id} 
               className={`
-                text-center bg-white/10 backdrop-blur-sm p-6 rounded-lg
+                text-center glass p-6 rounded-xl
                 border border-white/20 transform transition-all duration-700
                 ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}
-                hover:shadow-glow hover:bg-white/20 hover:scale-105
+                hover:shadow-glow hover:bg-white/20 hover:scale-105 relative hardware-accelerated
               `}
               style={{ transitionDelay: `${index * 200}ms` }}
             >
+              {/* Depth effect overlay */}
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 to-transparent opacity-40 pointer-events-none"></div>
+              
+              {/* Inner glow on hover */}
+              <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-white/50 to-transparent transform transition-opacity duration-500 opacity-0 group-hover:opacity-100"></div>
               <div className="inline-flex items-center justify-center p-3 bg-white/10 rounded-full mb-6">
                 {getIcon(index)}
               </div>
