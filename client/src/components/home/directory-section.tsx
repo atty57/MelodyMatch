@@ -119,13 +119,7 @@ export const DirectorySection = () => {
                         {entry.tags.map((tag, index) => (
                           <span 
                             key={index}
-                            className={`px-2 py-1 text-xs ${
-                              entry.bgColor === 'primary' 
-                                ? 'text-primary bg-primary bg-opacity-10'
-                                : entry.bgColor === 'secondary'
-                                  ? 'text-secondary bg-secondary bg-opacity-10'
-                                  : 'text-accent bg-accent bg-opacity-10'
-                            } rounded-full`}
+                            className="px-2 py-1 text-xs font-medium text-white bg-purple-600/80 border border-purple-500 rounded-full"
                           >
                             {tag}
                           </span>

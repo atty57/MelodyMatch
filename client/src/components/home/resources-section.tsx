@@ -60,13 +60,7 @@ export const ResourcesSection = () => {
                 </div>
                 <div className="p-6">
                   <div className="flex items-center mb-4">
-                    <span className={`px-3 py-1 text-xs font-semibold ${
-                      resource.category === 'Guide' 
-                        ? 'text-primary bg-primary bg-opacity-10'
-                        : resource.category === 'Tool'
-                          ? 'text-secondary bg-secondary bg-opacity-10'
-                          : 'text-accent bg-accent bg-opacity-10'
-                    } rounded-full`}>
+                    <span className="px-3 py-1 text-xs font-medium text-white bg-purple-600/80 border border-purple-500 rounded-full">
                       {resource.category}
                     </span>
                     <span className="ml-2 text-sm text-neutral-500">{resource.date}</span>
