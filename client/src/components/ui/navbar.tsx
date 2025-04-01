@@ -49,8 +49,8 @@ export const Navbar = () => {
     <header 
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-md' 
-          : 'bg-white'
+          ? 'bg-gray-900/90 backdrop-blur-md shadow-md border-b border-gray-800/50' 
+          : 'bg-gray-900 border-b border-gray-800/30'
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,7 +61,7 @@ export const Navbar = () => {
               <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center mr-2 shadow-sm group-hover:shadow-glow-accent transition-all duration-300">
                 <Music size={20} />
               </div>
-              <span className="text-primary font-bold text-2xl">
+              <span className="text-white font-bold text-2xl">
                 Music
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Pliance</span>
               </span>
@@ -78,7 +78,7 @@ export const Navbar = () => {
                     px-4 py-2 text-sm font-medium rounded-full transition-all duration-300
                     ${isActive('/') 
                       ? 'text-white bg-primary shadow-sm' 
-                      : 'text-neutral-700 hover:text-primary hover:bg-neutral-100'
+                      : 'text-gray-300 hover:text-white hover:bg-gray-800'
                     }
                   `}
                 >
@@ -91,29 +91,29 @@ export const Navbar = () => {
                       flex items-center text-sm font-medium px-4 py-2 rounded-full transition-all duration-300
                       ${location.startsWith('/compliance') 
                         ? 'text-white bg-primary shadow-sm' 
-                        : 'text-neutral-700 hover:text-primary hover:bg-neutral-100'
+                        : 'text-gray-300 hover:text-white hover:bg-gray-800'
                       }
                     `}
                   >
                     Compliance <ChevronDown size={14} className="ml-1 transition-transform duration-300 group-hover:rotate-180" />
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="w-56 p-2 mt-1 border border-neutral-200 rounded-xl shadow-lg bg-white/95 backdrop-blur-sm">
-                    <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-primary/10 py-2 my-1">
+                  <DropdownMenuContent align="start" className="w-56 p-2 mt-1 border border-gray-700/50 rounded-xl shadow-lg bg-gray-800/90 backdrop-blur-md">
+                    <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-gray-700/50 py-2 my-1 text-gray-300 hover:text-white">
                       <Link href="/compliance/royalty" className="w-full cursor-pointer">
                         Royalty Compliance
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-primary/10 py-2 my-1">
+                    <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-gray-700/50 py-2 my-1 text-gray-300 hover:text-white">
                       <Link href="/compliance/licensing" className="w-full cursor-pointer">
                         Licensing
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-primary/10 py-2 my-1">
+                    <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-gray-700/50 py-2 my-1 text-gray-300 hover:text-white">
                       <Link href="/compliance/copyright" className="w-full cursor-pointer">
                         Copyright Protection
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-primary/10 py-2 my-1">
+                    <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-gray-700/50 py-2 my-1 text-gray-300 hover:text-white">
                       <Link href="/compliance/distribution" className="w-full cursor-pointer">
                         Distribution Standards
                       </Link>
@@ -127,29 +127,29 @@ export const Navbar = () => {
                       flex items-center text-sm font-medium px-4 py-2 rounded-full transition-all duration-300
                       ${location.startsWith('/directory') 
                         ? 'text-white bg-primary shadow-sm' 
-                        : 'text-neutral-700 hover:text-primary hover:bg-neutral-100'
+                        : 'text-gray-300 hover:text-white hover:bg-gray-800'
                       }
                     `}
                   >
                     Directory <ChevronDown size={14} className="ml-1 transition-transform duration-300 group-hover:rotate-180" />
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="w-56 p-2 mt-1 border border-neutral-200 rounded-xl shadow-lg bg-white/95 backdrop-blur-sm">
-                    <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-primary/10 py-2 my-1">
+                  <DropdownMenuContent align="start" className="w-56 p-2 mt-1 border border-gray-700/50 rounded-xl shadow-lg bg-gray-800/90 backdrop-blur-md">
+                    <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-gray-700/50 py-2 my-1 text-gray-300 hover:text-white">
                       <Link href="/directory/labels" className="w-full cursor-pointer">
                         Labels
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-primary/10 py-2 my-1">
+                    <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-gray-700/50 py-2 my-1 text-gray-300 hover:text-white">
                       <Link href="/directory/artists" className="w-full cursor-pointer">
                         Artists
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-primary/10 py-2 my-1">
+                    <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-gray-700/50 py-2 my-1 text-gray-300 hover:text-white">
                       <Link href="/directory/distributors" className="w-full cursor-pointer">
                         Distributors
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-primary/10 py-2 my-1">
+                    <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-gray-700/50 py-2 my-1 text-gray-300 hover:text-white">
                       <Link href="/directory/agencies" className="w-full cursor-pointer">
                         Agencies
                       </Link>
@@ -163,7 +163,7 @@ export const Navbar = () => {
                     px-4 py-2 text-sm font-medium rounded-full transition-all duration-300
                     ${isActive('/resources') 
                       ? 'text-white bg-primary shadow-sm' 
-                      : 'text-neutral-700 hover:text-primary hover:bg-neutral-100'
+                      : 'text-gray-300 hover:text-white hover:bg-gray-800'
                     }
                   `}
                 >
@@ -176,7 +176,7 @@ export const Navbar = () => {
                     px-4 py-2 text-sm font-medium rounded-full transition-all duration-300
                     ${isActive('/about') 
                       ? 'text-white bg-primary shadow-sm' 
-                      : 'text-neutral-700 hover:text-primary hover:bg-neutral-100'
+                      : 'text-gray-300 hover:text-white hover:bg-gray-800'
                     }
                   `}
                 >
@@ -189,7 +189,7 @@ export const Navbar = () => {
                     px-4 py-2 text-sm font-medium rounded-full transition-all duration-300
                     ${isActive('/contact') 
                       ? 'text-white bg-primary shadow-sm' 
-                      : 'text-neutral-700 hover:text-primary hover:bg-neutral-100'
+                      : 'text-gray-300 hover:text-white hover:bg-gray-800'
                     }
                   `}
                 >
@@ -218,14 +218,14 @@ export const Navbar = () => {
                 <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center shadow-sm">
                   <Music size={20} />
                 </div>
-                <span className="text-primary font-bold text-2xl ml-2">
+                <span className="text-white font-bold text-2xl ml-2">
                   Music
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Pliance</span>
                 </span>
               </Link>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-full text-neutral-500 hover:text-primary hover:bg-neutral-100 transition-all duration-300 focus:outline-none"
+                className="p-2 rounded-full text-gray-400 hover:text-white hover:bg-gray-800 transition-all duration-300 focus:outline-none"
               >
                 <span className="sr-only">Open main menu</span>
                 {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -239,7 +239,7 @@ export const Navbar = () => {
       {isMobile && (
         <div 
           className={`
-            fixed inset-0 z-40 bg-white transition-transform duration-300 ease-in-out transform ${
+            fixed inset-0 z-40 bg-gray-900 text-white transition-transform duration-300 ease-in-out transform ${
               mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
             }
           `}
@@ -252,7 +252,7 @@ export const Navbar = () => {
                 block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200
                 ${isActive('/') 
                   ? 'text-white bg-primary' 
-                  : 'text-neutral-900 hover:bg-neutral-100'
+                  : 'text-gray-300 hover:text-white hover:bg-gray-800'
                 }
               `}
               onClick={() => setMobileMenuOpen(false)}
@@ -267,7 +267,7 @@ export const Navbar = () => {
                 text-base font-medium rounded-lg transition-all duration-200
                 ${location.startsWith('/compliance') 
                   ? 'text-white bg-primary' 
-                  : 'text-neutral-900 hover:bg-neutral-100'
+                  : 'text-gray-300 hover:text-white hover:bg-gray-800'
                 }
               `}
             >
@@ -278,28 +278,28 @@ export const Navbar = () => {
               <div className="pl-4 space-y-1 mt-1 mb-2">
                 <Link 
                   href="/compliance/royalty" 
-                  className="block px-4 py-2 text-base font-medium text-neutral-700 hover:text-primary rounded-lg hover:bg-neutral-50 transition-all duration-200"
+                  className="block px-4 py-2 text-base font-medium text-gray-400 hover:text-white rounded-lg hover:bg-gray-800/70 transition-all duration-200"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Royalty Compliance
                 </Link>
                 <Link 
                   href="/compliance/licensing" 
-                  className="block px-4 py-2 text-base font-medium text-neutral-700 hover:text-primary rounded-lg hover:bg-neutral-50 transition-all duration-200"
+                  className="block px-4 py-2 text-base font-medium text-gray-400 hover:text-white rounded-lg hover:bg-gray-800/70 transition-all duration-200"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Licensing
                 </Link>
                 <Link 
                   href="/compliance/copyright" 
-                  className="block px-4 py-2 text-base font-medium text-neutral-700 hover:text-primary rounded-lg hover:bg-neutral-50 transition-all duration-200"
+                  className="block px-4 py-2 text-base font-medium text-gray-400 hover:text-white rounded-lg hover:bg-gray-800/70 transition-all duration-200"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Copyright Protection
                 </Link>
                 <Link 
                   href="/compliance/distribution" 
-                  className="block px-4 py-2 text-base font-medium text-neutral-700 hover:text-primary rounded-lg hover:bg-neutral-50 transition-all duration-200"
+                  className="block px-4 py-2 text-base font-medium text-gray-400 hover:text-white rounded-lg hover:bg-gray-800/70 transition-all duration-200"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Distribution Standards
@@ -314,7 +314,7 @@ export const Navbar = () => {
                 text-base font-medium rounded-lg transition-all duration-200
                 ${location.startsWith('/directory') 
                   ? 'text-white bg-primary' 
-                  : 'text-neutral-900 hover:bg-neutral-100'
+                  : 'text-gray-300 hover:text-white hover:bg-gray-800'
                 }
               `}
             >
@@ -325,28 +325,28 @@ export const Navbar = () => {
               <div className="pl-4 space-y-1 mt-1 mb-2">
                 <Link 
                   href="/directory/labels" 
-                  className="block px-4 py-2 text-base font-medium text-neutral-700 hover:text-primary rounded-lg hover:bg-neutral-50 transition-all duration-200"
+                  className="block px-4 py-2 text-base font-medium text-gray-400 hover:text-white rounded-lg hover:bg-gray-800/70 transition-all duration-200"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Labels
                 </Link>
                 <Link 
                   href="/directory/artists" 
-                  className="block px-4 py-2 text-base font-medium text-neutral-700 hover:text-primary rounded-lg hover:bg-neutral-50 transition-all duration-200"
+                  className="block px-4 py-2 text-base font-medium text-gray-400 hover:text-white rounded-lg hover:bg-gray-800/70 transition-all duration-200"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Artists
                 </Link>
                 <Link 
                   href="/directory/distributors" 
-                  className="block px-4 py-2 text-base font-medium text-neutral-700 hover:text-primary rounded-lg hover:bg-neutral-50 transition-all duration-200"
+                  className="block px-4 py-2 text-base font-medium text-gray-400 hover:text-white rounded-lg hover:bg-gray-800/70 transition-all duration-200"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Distributors
                 </Link>
                 <Link 
                   href="/directory/agencies" 
-                  className="block px-4 py-2 text-base font-medium text-neutral-700 hover:text-primary rounded-lg hover:bg-neutral-50 transition-all duration-200"
+                  className="block px-4 py-2 text-base font-medium text-gray-400 hover:text-white rounded-lg hover:bg-gray-800/70 transition-all duration-200"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Agencies
@@ -360,7 +360,7 @@ export const Navbar = () => {
                 block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200
                 ${isActive('/resources') 
                   ? 'text-white bg-primary' 
-                  : 'text-neutral-900 hover:bg-neutral-100'
+                  : 'text-gray-300 hover:text-white hover:bg-gray-800'
                 }
               `}
               onClick={() => setMobileMenuOpen(false)}
@@ -374,7 +374,7 @@ export const Navbar = () => {
                 block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200
                 ${isActive('/about') 
                   ? 'text-white bg-primary' 
-                  : 'text-neutral-900 hover:bg-neutral-100'
+                  : 'text-gray-300 hover:text-white hover:bg-gray-800'
                 }
               `}
               onClick={() => setMobileMenuOpen(false)}
@@ -388,7 +388,7 @@ export const Navbar = () => {
                 block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200
                 ${isActive('/contact') 
                   ? 'text-white bg-primary' 
-                  : 'text-neutral-900 hover:bg-neutral-100'
+                  : 'text-gray-300 hover:text-white hover:bg-gray-800'
                 }
               `}
               onClick={() => setMobileMenuOpen(false)}
@@ -396,7 +396,7 @@ export const Navbar = () => {
               Contact
             </Link>
             
-            <div className="pt-6 mt-6 border-t border-neutral-200">
+            <div className="pt-6 mt-6 border-t border-gray-700/50">
               <Button 
                 asChild
                 className="w-full bg-gradient-to-r from-primary to-secondary hover:shadow-glow-accent text-white transition-all duration-300 font-medium"
