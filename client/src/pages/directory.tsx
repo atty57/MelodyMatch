@@ -187,13 +187,7 @@ export default function Directory() {
                             {entry.tags.map((tag, index) => (
                               <span 
                                 key={index}
-                                className={`px-2 py-1 text-xs ${
-                                  entry.bgColor === 'primary' 
-                                    ? 'text-purple-200 bg-purple-800/30 border border-purple-700/40'
-                                    : entry.bgColor === 'secondary'
-                                      ? 'text-indigo-200 bg-indigo-800/30 border border-indigo-700/40'
-                                      : 'text-blue-200 bg-blue-800/30 border border-blue-700/40'
-                                } rounded-full`}
+                                className="px-2 py-1 text-xs font-medium text-white bg-purple-600/80 border border-purple-500 rounded-full"
                               >
                                 {tag}
                               </span>

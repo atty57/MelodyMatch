@@ -165,13 +165,7 @@ export default function Resources() {
                     </div>
                     <CardContent className="p-6">
                       <div className="flex items-center mb-4">
-                        <span className={`px-3 py-1 text-xs font-semibold ${
-                          resource.category === 'Guide' 
-                            ? 'text-purple-200 bg-purple-800/30 border border-purple-700/40'
-                            : resource.category === 'Tool'
-                              ? 'text-indigo-200 bg-indigo-800/30 border border-indigo-700/40'
-                              : 'text-blue-200 bg-blue-800/30 border border-blue-700/40'
-                        } rounded-full`}>
+                        <span className="px-3 py-1 text-xs font-medium text-white bg-purple-600/80 border border-purple-500 rounded-full">
                           {resource.category}
                         </span>
                         <span className="ml-2 text-sm text-gray-400">{resource.date}</span>
