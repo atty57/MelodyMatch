@@ -136,6 +136,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // Get all compliance checklist items (alternate route)
+  apiRouter.get("/compliance/checklist", async (req, res) => {
+    try {
+      const items = await storage.getComplianceChecklistItems();
+      res.json(items);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch compliance checklist items" });
+    }
+  });
+  
   // Get compliance checklist items by category
   apiRouter.get("/compliance-checklist/category/:category", async (req, res) => {
     try {
