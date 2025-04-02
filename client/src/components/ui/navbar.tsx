@@ -99,6 +99,11 @@ export const Navbar = () => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start" className="w-56 p-2 mt-1 border border-gray-700/50 rounded-xl shadow-lg bg-gray-800/90 backdrop-blur-md">
                     <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-gray-700/50 py-2 my-1 text-gray-300 hover:text-white">
+                      <Link href="/compliance" className="w-full cursor-pointer">
+                        Compliance Checklist
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild className="rounded-lg transition-all duration-200 hover:bg-gray-700/50 py-2 my-1 text-gray-300 hover:text-white">
                       <Link href="/compliance/royalty" className="w-full cursor-pointer">
                         Royalty Compliance
                       </Link>
@@ -276,6 +281,13 @@ export const Navbar = () => {
             
             {mobileSubmenus.compliance && (
               <div className="pl-4 space-y-1 mt-1 mb-2">
+                <Link 
+                  href="/compliance" 
+                  className="block px-4 py-2 text-base font-medium text-gray-400 hover:text-white rounded-lg hover:bg-gray-800/70 transition-all duration-200"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Compliance Checklist
+                </Link>
                 <Link 
                   href="/compliance/royalty" 
                   className="block px-4 py-2 text-base font-medium text-gray-400 hover:text-white rounded-lg hover:bg-gray-800/70 transition-all duration-200"

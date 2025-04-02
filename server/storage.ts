@@ -3,7 +3,9 @@ import {
   subscribers, type Subscriber, type InsertSubscriber,
   resources, type Resource, type InsertResource,
   directoryEntries, type DirectoryEntry, type InsertDirectoryEntry,
-  contactMessages, type ContactMessage, type InsertContactMessage
+  contactMessages, type ContactMessage, type InsertContactMessage,
+  complianceChecklistItems, type ComplianceChecklistItem, type InsertComplianceChecklistItem,
+  userChecklists, type UserChecklist, type InsertUserChecklist
 } from "@shared/schema";
 
 // Storage interface with CRUD methods
@@ -33,6 +35,19 @@ export interface IStorage {
   // Contact message operations
   getContactMessages(): Promise<ContactMessage[]>;
   createContactMessage(message: InsertContactMessage): Promise<ContactMessage>;
+  
+  // Compliance checklist operations
+  getComplianceChecklistItems(): Promise<ComplianceChecklistItem[]>;
+  getComplianceChecklistItemsByCategory(category: string): Promise<ComplianceChecklistItem[]>;
+  getComplianceChecklistItemsByType(type: string): Promise<ComplianceChecklistItem[]>;
+  getComplianceChecklistItemById(id: number): Promise<ComplianceChecklistItem | undefined>;
+  createComplianceChecklistItem(item: InsertComplianceChecklistItem): Promise<ComplianceChecklistItem>;
+  
+  // User checklist operations
+  getUserChecklists(userId: number): Promise<UserChecklist[]>;
+  getUserChecklistById(id: number): Promise<UserChecklist | undefined>;
+  createUserChecklist(checklist: InsertUserChecklist): Promise<UserChecklist>;
+  updateUserChecklist(id: number, completedItems: number[], notes?: string, status?: string): Promise<UserChecklist | undefined>;
 }
 
 export class MemStorage implements IStorage {
@@ -41,12 +56,16 @@ export class MemStorage implements IStorage {
   private resources: Map<number, Resource>;
   private directoryEntries: Map<number, DirectoryEntry>;
   private contactMessages: Map<number, ContactMessage>;
+  private complianceChecklistItems: Map<number, ComplianceChecklistItem>;
+  private userChecklists: Map<number, UserChecklist>;
   
   private userCurrentId: number;
   private subscriberCurrentId: number;
   private resourceCurrentId: number;
   private directoryEntryCurrentId: number;
   private contactMessageCurrentId: number;
+  private complianceChecklistItemCurrentId: number;
+  private userChecklistCurrentId: number;
 
   constructor() {
     this.users = new Map();
@@ -54,16 +73,21 @@ export class MemStorage implements IStorage {
     this.resources = new Map();
     this.directoryEntries = new Map();
     this.contactMessages = new Map();
+    this.complianceChecklistItems = new Map();
+    this.userChecklists = new Map();
     
     this.userCurrentId = 1;
     this.subscriberCurrentId = 1;
     this.resourceCurrentId = 1;
     this.directoryEntryCurrentId = 1;
     this.contactMessageCurrentId = 1;
+    this.complianceChecklistItemCurrentId = 1;
+    this.userChecklistCurrentId = 1;
     
     // Initialize with sample data
     this.initializeResources();
     this.initializeDirectoryEntries();
+    this.initializeComplianceChecklistItems();
   }
 
   // User methods
@@ -123,7 +147,12 @@ export class MemStorage implements IStorage {
   
   async createResource(insertResource: InsertResource): Promise<Resource> {
     const id = this.resourceCurrentId++;
-    const resource: Resource = { ...insertResource, id };
+    const resource: Resource = { 
+      ...insertResource, 
+      id,
+      downloadLink: insertResource.downloadLink || null,
+      accessLink: insertResource.accessLink || null 
+    };
     this.resources.set(id, resource);
     return resource;
   }
@@ -230,6 +259,170 @@ export class MemStorage implements IStorage {
     
     sampleEntries.forEach(entry => {
       this.createDirectoryEntry(entry);
+    });
+  }
+  
+  // Compliance checklist methods
+  async getComplianceChecklistItems(): Promise<ComplianceChecklistItem[]> {
+    return Array.from(this.complianceChecklistItems.values());
+  }
+  
+  async getComplianceChecklistItemsByCategory(category: string): Promise<ComplianceChecklistItem[]> {
+    return Array.from(this.complianceChecklistItems.values()).filter(
+      (item) => item.category === category,
+    );
+  }
+  
+  async getComplianceChecklistItemsByType(type: string): Promise<ComplianceChecklistItem[]> {
+    return Array.from(this.complianceChecklistItems.values()).filter(
+      (item) => item.requiredFor.includes(type),
+    );
+  }
+  
+  async getComplianceChecklistItemById(id: number): Promise<ComplianceChecklistItem | undefined> {
+    return this.complianceChecklistItems.get(id);
+  }
+  
+  async createComplianceChecklistItem(insertItem: InsertComplianceChecklistItem): Promise<ComplianceChecklistItem> {
+    const id = this.complianceChecklistItemCurrentId++;
+    const item: ComplianceChecklistItem = { 
+      ...insertItem, 
+      id,
+      resources: insertItem.resources || null,
+      isMandatory: insertItem.isMandatory !== undefined ? insertItem.isMandatory : false
+    };
+    this.complianceChecklistItems.set(id, item);
+    return item;
+  }
+  
+  // User checklist methods
+  async getUserChecklists(userId: number): Promise<UserChecklist[]> {
+    return Array.from(this.userChecklists.values()).filter(
+      (checklist) => checklist.userId === userId,
+    );
+  }
+  
+  async getUserChecklistById(id: number): Promise<UserChecklist | undefined> {
+    return this.userChecklists.get(id);
+  }
+  
+  async createUserChecklist(insertChecklist: InsertUserChecklist): Promise<UserChecklist> {
+    const id = this.userChecklistCurrentId++;
+    const checklist: UserChecklist = { 
+      ...insertChecklist, 
+      id,
+      createdAt: new Date(),
+      completedItems: insertChecklist.completedItems || [],
+      totalItems: insertChecklist.totalItems || 0,
+      notes: insertChecklist.notes || null,
+      status: insertChecklist.status || "in_progress"
+    };
+    this.userChecklists.set(id, checklist);
+    return checklist;
+  }
+  
+  async updateUserChecklist(id: number, completedItems: number[], notes?: string | null, status?: string): Promise<UserChecklist | undefined> {
+    const checklist = this.userChecklists.get(id);
+    if (!checklist) return undefined;
+    
+    const updatedChecklist: UserChecklist = {
+      ...checklist,
+      completedItems,
+      notes: notes !== undefined ? notes : checklist.notes,
+      status: status !== undefined ? status : checklist.status
+    };
+    
+    this.userChecklists.set(id, updatedChecklist);
+    return updatedChecklist;
+  }
+  
+  // Initialize sample compliance checklist items
+  private initializeComplianceChecklistItems() {
+    const sampleItems: InsertComplianceChecklistItem[] = [
+      {
+        category: "Copyright",
+        title: "Register Your Compositions with Copyright Office",
+        description: "Register all original compositions with the U.S. Copyright Office or equivalent international authority.",
+        requiredFor: ["artist", "songwriter", "publisher"],
+        isMandatory: true,
+        resources: ["/resources/copyright-registration-guide.pdf"]
+      },
+      {
+        category: "Royalties",
+        title: "Register with PROs (ASCAP, BMI, SESAC)",
+        description: "Join a Performing Rights Organization to collect performance royalties for your music.",
+        requiredFor: ["artist", "songwriter", "publisher"],
+        isMandatory: true,
+        resources: ["/resources/pro-comparison.pdf"]
+      },
+      {
+        category: "Licensing",
+        title: "Create Sync Licensing Agreement Templates",
+        description: "Prepare standard templates for synchronization licensing to streamline placement opportunities.",
+        requiredFor: ["artist", "publisher", "label"],
+        isMandatory: false,
+        resources: ["/resources/sync-license-template.docx"]
+      },
+      {
+        category: "Distribution",
+        title: "Secure Digital Distribution Agreement",
+        description: "Establish a contract with a digital distributor to place your music on streaming platforms.",
+        requiredFor: ["artist", "label"],
+        isMandatory: true,
+        resources: ["/resources/distribution-comparison.pdf"]
+      },
+      {
+        category: "Legal",
+        title: "Register Business Entity",
+        description: "Form an appropriate business entity (LLC, Corporation) to protect personal assets.",
+        requiredFor: ["artist", "label", "publisher", "manager"],
+        isMandatory: false,
+        resources: ["/resources/music-business-entities.pdf"]
+      },
+      {
+        category: "Metadata",
+        title: "Standardize Metadata for All Releases",
+        description: "Ensure consistent, accurate metadata across all platforms including ISRC and UPC codes.",
+        requiredFor: ["artist", "label", "distributor"],
+        isMandatory: true,
+        resources: ["/resources/metadata-guide.pdf"]
+      },
+      {
+        category: "Contracts",
+        title: "Artist-Label Agreement",
+        description: "Clear written agreement outlining rights, royalties, and obligations between artist and label.",
+        requiredFor: ["artist", "label"],
+        isMandatory: true,
+        resources: ["/resources/label-agreement-template.pdf"]
+      },
+      {
+        category: "International",
+        title: "Register with International Collection Societies",
+        description: "Ensure your music is registered with collection societies in key international markets.",
+        requiredFor: ["artist", "publisher", "songwriter"],
+        isMandatory: false,
+        resources: ["/resources/international-royalties.pdf"]
+      },
+      {
+        category: "Accounting",
+        title: "Set Up Royalty Accounting System",
+        description: "Establish a system to track, calculate, and distribute royalties to all entitled parties.",
+        requiredFor: ["label", "publisher", "distributor"],
+        isMandatory: true,
+        resources: ["/resources/royalty-accounting-guide.pdf"]
+      },
+      {
+        category: "Copyright",
+        title: "Secure Mechanical Licenses",
+        description: "Obtain proper licenses for covering or sampling other artists' work in your recordings.",
+        requiredFor: ["artist", "label", "producer"],
+        isMandatory: true,
+        resources: ["/resources/mechanical-licensing-guide.pdf"]
+      }
+    ];
+    
+    sampleItems.forEach(item => {
+      this.createComplianceChecklistItem(item);
     });
   }
 }

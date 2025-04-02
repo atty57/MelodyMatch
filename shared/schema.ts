@@ -84,3 +84,42 @@ export const insertContactMessageSchema = createInsertSchema(contactMessages).om
 
 export type InsertContactMessage = z.infer<typeof insertContactMessageSchema>;
 export type ContactMessage = typeof contactMessages.$inferSelect;
+
+// Compliance Checklist Items
+export const complianceChecklistItems = pgTable("compliance_checklist_items", {
+  id: serial("id").primaryKey(),
+  category: text("category").notNull(),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  requiredFor: text("required_for").array().notNull(),
+  isMandatory: boolean("is_mandatory").notNull().default(false),
+  resources: text("resources").array()
+});
+
+export const insertComplianceChecklistItemSchema = createInsertSchema(complianceChecklistItems).omit({
+  id: true
+});
+
+export type InsertComplianceChecklistItem = z.infer<typeof insertComplianceChecklistItemSchema>;
+export type ComplianceChecklistItem = typeof complianceChecklistItems.$inferSelect;
+
+// User Compliance Checklists
+export const userChecklists = pgTable("user_checklists", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => users.id),
+  name: text("name").notNull(),
+  type: text("type").notNull(), // e.g., "artist", "label", "distributor"
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  completedItems: integer("completed_items").array().notNull().default([]),
+  totalItems: integer("total_items").notNull().default(0),
+  notes: text("notes"),
+  status: text("status").notNull().default("in_progress")
+});
+
+export const insertUserChecklistSchema = createInsertSchema(userChecklists).omit({
+  id: true,
+  createdAt: true
+});
+
+export type InsertUserChecklist = z.infer<typeof insertUserChecklistSchema>;
+export type UserChecklist = typeof userChecklists.$inferSelect;
