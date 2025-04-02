@@ -100,7 +100,7 @@ export default function Compliance() {
   }
   
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden w-full">
       {/* Parallax background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-gray-900 to-black opacity-80"></div>
@@ -118,7 +118,7 @@ export default function Compliance() {
         <div className="absolute top-60 left-40 w-30 h-30 border border-purple-500/20 rounded-full opacity-20"></div>
       </div>
       
-      <div className="container py-10 space-y-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 py-10 space-y-6 relative z-10 max-w-7xl">
         <div className="text-center space-y-4 relative mx-auto max-w-4xl mb-6">
           <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-600/20 via-indigo-600/20 to-purple-600/20 blur-xl transform scale-110 animate-pulse-slow"></div>
           
