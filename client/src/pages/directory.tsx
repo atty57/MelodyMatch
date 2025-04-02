@@ -75,14 +75,14 @@ export default function Directory() {
               <div className="flex flex-col lg:flex-row lg:items-center gap-6">
                 <div className="flex-grow relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Search className="h-5 w-5 text-purple-300" />
+                    <Search className="h-5 w-5 text-gray-500" />
                   </div>
                   <Input
                     type="text"
                     placeholder="Search by name, type, location or tags..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 bg-gray-700/50 border-gray-600 text-white placeholder:text-gray-400 focus:ring-purple-500 focus:border-purple-500"
+                    className="pl-10 bg-gray-100/90 border-gray-300 text-gray-900 placeholder:text-gray-500 focus:ring-purple-500 focus:border-purple-500 shadow-md shadow-black/10"
                   />
                 </div>
                 <Button 
