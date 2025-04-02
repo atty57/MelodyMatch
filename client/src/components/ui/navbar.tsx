@@ -218,24 +218,13 @@ export const Navbar = () => {
 
           {/* Mobile menu button */}
           {isMobile && (
-            <div className="flex items-center">
-              <Link href="/" className="mr-auto flex items-center group">
-                <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center shadow-sm">
-                  <Music size={20} />
-                </div>
-                <span className="text-white font-bold text-2xl ml-2">
-                  Music
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Pliance</span>
-                </span>
-              </Link>
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-full text-gray-400 hover:text-white hover:bg-gray-800 transition-all duration-300 focus:outline-none"
-              >
-                <span className="sr-only">Open main menu</span>
-                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-full text-gray-400 hover:text-white hover:bg-gray-800 transition-all duration-300 focus:outline-none"
+            >
+              <span className="sr-only">Open main menu</span>
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           )}
         </div>
       </div>
