@@ -58,8 +58,9 @@ export const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center group">
-              <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center mr-2 shadow-sm group-hover:shadow-glow-accent transition-all duration-300">
-                <Music size={20} />
+              <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center mr-2 shadow-sm group-hover:shadow-glow-accent transition-all duration-300 animate-pulse-glow relative">
+                <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary/50 to-secondary/50 blur-lg animate-pulse-glow"></div>
+                <Music size={20} className="relative z-10 animate-bounce-subtle" />
               </div>
               <span className="text-white font-bold text-2xl">
                 Music
