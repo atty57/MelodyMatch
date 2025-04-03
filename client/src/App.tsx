@@ -4,6 +4,11 @@ import Home from "@/pages/home";
 import NotFound from "@/pages/not-found";
 import Resources from "@/pages/resources";
 import Directory from "@/pages/directory";
+import DirectoryDetail from "@/pages/directory/[id]";
+import LabelsDirectory from "@/pages/directory/labels";
+import PublishersDirectory from "@/pages/directory/publishers";
+import DistributorsDirectory from "@/pages/directory/distributors";
+import ArtistsDirectory from "@/pages/directory/artists";
 import Compliance from "@/pages/compliance";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
@@ -48,6 +53,11 @@ function App() {
           <Route path="/" component={Home} />
           <Route path="/compliance" component={Compliance} />
           <Route path="/directory" component={Directory} />
+          <Route path="/directory/labels" component={LabelsDirectory} />
+          <Route path="/directory/publishers" component={PublishersDirectory} />
+          <Route path="/directory/distributors" component={DistributorsDirectory} />
+          <Route path="/directory/artists" component={ArtistsDirectory} />
+          <Route path="/directory/:id" component={DirectoryDetail} />
           <Route path="/resources" component={Resources} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
