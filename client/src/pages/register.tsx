@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
+import { useAuth } from "@/hooks/use-auth";
 
 import { Navbar } from "@/components/ui/navbar";
 import { Button } from "@/components/ui/button";
@@ -20,6 +19,8 @@ import { Music, Building2, UserCircle, Lock, Mail, CheckCircle, User, InfoIcon }
 
 // Form schemas
 const registerSchema = z.object({
+  username: z.string().min(3, { message: "Username must be at least 3 characters" })
+    .regex(/^[a-z0-9_-]+$/i, { message: "Username can only contain letters, numbers, underscores, and dashes" }),
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
   password: z.string().min(8, { 
@@ -81,6 +82,7 @@ export default function Register() {
   const registerForm = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
+      username: "",
       name: "",
       email: "",
       password: "",
@@ -92,29 +94,16 @@ export default function Register() {
     },
   });
 
-  // Register mutation
-  const registerMutation = useMutation({
-    mutationFn: async (values: RegisterFormValues) => {
-      return apiRequest("POST", "/api/auth/register", values);
-    },
-    onSuccess: () => {
-      toast({
-        title: "Registration successful",
-        description: "Your account has been created. Please sign in.",
-        variant: "default",
-      });
-      
+  // Use auth hook
+  const { registerMutation } = useAuth();
+  
+  // Handle successful registration
+  useEffect(() => {
+    if (registerMutation.isSuccess) {
       // Redirect to login page after successful registration
       navigate("/login");
-    },
-    onError: (error: any) => {
-      toast({
-        title: "Registration failed",
-        description: error.message || "There was a problem with your registration. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
+    }
+  }, [registerMutation.isSuccess, navigate]);
 
   // Handle form submission
   function onSubmit(values: RegisterFormValues) {
@@ -182,6 +171,29 @@ export default function Register() {
                     
                     <Form {...registerForm}>
                       <form onSubmit={registerForm.handleSubmit(onSubmit)} className="space-y-4">
+                        <FormField
+                          control={registerForm.control}
+                          name="username"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-gray-300">Username</FormLabel>
+                              <FormControl>
+                                <div className="relative">
+                                  <UserCircle className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
+                                  <AnimatedInput 
+                                    {...field} 
+                                    placeholder="Choose a unique username"
+                                    className={`bg-gray-800/50 pl-10 ${accountType === "artist" ? "border-purple-500/20 focus:border-purple-500/50" : "border-blue-500/20 focus:border-blue-500/50"}`}
+                                    onFocusAnimation 
+                                    errorState={!!registerForm.formState.errors.username}
+                                  />
+                                </div>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
                         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 gap-4">
                           <FormField
                             control={registerForm.control}
