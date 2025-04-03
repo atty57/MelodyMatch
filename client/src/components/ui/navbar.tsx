@@ -204,6 +204,18 @@ export const Navbar = () => {
               </nav>
 
               <div className="flex items-center space-x-3">
+                <Link 
+                  href="/login"
+                  className={`
+                    px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 border border-gray-700
+                    ${isActive('/login') 
+                      ? 'text-white bg-gray-800 border-primary' 
+                      : 'text-gray-300 hover:text-white hover:bg-gray-800 hover:border-primary'
+                    }
+                  `}
+                >
+                  Sign In
+                </Link>
                 <Button 
                   asChild
                   className="bg-gradient-to-r from-primary to-secondary hover:shadow-glow-accent text-white transition-all duration-300 font-medium"
@@ -398,7 +410,21 @@ export const Navbar = () => {
               Contact
             </Link>
             
-            <div className="pt-6 mt-6 border-t border-gray-700/50">
+            <div className="pt-6 mt-6 border-t border-gray-700/50 space-y-4">
+              <Link 
+                href="/login" 
+                className={`
+                  block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 border border-gray-700/50 text-center
+                  ${isActive('/login') 
+                    ? 'text-white bg-primary' 
+                    : 'text-gray-300 hover:text-white hover:bg-gray-800'
+                  }
+                `}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Sign In
+              </Link>
+              
               <Button 
                 asChild
                 className="w-full bg-gradient-to-r from-primary to-secondary hover:shadow-glow-accent text-white transition-all duration-300 font-medium"
