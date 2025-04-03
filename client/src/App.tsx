@@ -10,6 +10,10 @@ import PublishersDirectory from "@/pages/directory/publishers";
 import DistributorsDirectory from "@/pages/directory/distributors";
 import ArtistsDirectory from "@/pages/directory/artists";
 import Compliance from "@/pages/compliance";
+import RoyaltyCompliance from "@/pages/compliance/royalty";
+import LicensingCompliance from "@/pages/compliance/licensing";
+import CopyrightProtection from "@/pages/compliance/copyright";
+import DistributionStandards from "@/pages/compliance/distribution";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import { PageLoader } from "@/components/ui/loader";
@@ -52,6 +56,10 @@ function App() {
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/compliance" component={Compliance} />
+          <Route path="/compliance/royalty" component={RoyaltyCompliance} />
+          <Route path="/compliance/licensing" component={LicensingCompliance} />
+          <Route path="/compliance/copyright" component={CopyrightProtection} />
+          <Route path="/compliance/distribution" component={DistributionStandards} />
           <Route path="/directory" component={Directory} />
           <Route path="/directory/labels" component={LabelsDirectory} />
           <Route path="/directory/publishers" component={PublishersDirectory} />
