@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
+import { useAuth } from "@/hooks/use-auth";
 
 import { Navbar } from "@/components/ui/navbar";
 import { Button } from "@/components/ui/button";
@@ -40,33 +39,20 @@ export default function Login() {
     },
   });
 
-  // Login mutation
-  const loginMutation = useMutation({
-    mutationFn: async (values: LoginFormValues) => {
-      return apiRequest("POST", "/api/auth/login", values);
-    },
-    onSuccess: () => {
-      toast({
-        title: "Login successful",
-        description: "Welcome back to MusicPliance.",
-        variant: "default",
-      });
-      
+  // Use auth hook
+  const { loginMutation } = useAuth();
+
+  // Handle successful login
+  useEffect(() => {
+    if (loginMutation.isSuccess) {
       // Redirect based on user type
       if (accountType === "artist") {
         navigate("/artist-dashboard");
       } else {
         navigate("/label-dashboard");
       }
-    },
-    onError: (error: any) => {
-      toast({
-        title: "Login failed",
-        description: error.message || "Invalid email or password. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
+    }
+  }, [loginMutation.isSuccess, accountType, navigate]);
 
   // Handle login form submission
   function onLoginSubmit(values: LoginFormValues) {

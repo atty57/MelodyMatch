@@ -18,8 +18,12 @@ import Login from "@/pages/login";
 import Register from "@/pages/register";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
+import ArtistDashboard from "@/pages/artist-dashboard";
+import LabelDashboard from "@/pages/label-dashboard";
 import { PageLoader } from "@/components/ui/loader";
 import { Toaster } from "@/components/ui/toaster";
+import { AuthProvider } from "@/hooks/use-auth";
+import { ProtectedRoute } from "@/components/ui/protected-route";
 
 function App() {
   // State for loader
@@ -49,7 +53,7 @@ function App() {
   }, [location]);
 
   return (
-    <>
+    <AuthProvider>
       {/* Page loader */}
       <PageLoader show={loading} />
       
@@ -73,13 +77,16 @@ function App() {
           <Route path="/contact" component={Contact} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          {/* Protected routes */}
+          <ProtectedRoute path="/artist-dashboard" component={ArtistDashboard} userType="artist" />
+          <ProtectedRoute path="/label-dashboard" component={LabelDashboard} userType="label" />
           <Route component={NotFound} />
         </Switch>
       </div>
       
       {/* Toast notifications */}
       <Toaster />
-    </>
+    </AuthProvider>
   );
 }
 

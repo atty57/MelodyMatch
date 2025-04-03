@@ -1,6 +1,7 @@
-import express, { type Express } from "express";
+import express, { type Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { setupAuth } from "./auth";
 import { 
   insertSubscriberSchema, 
   insertContactMessageSchema,
@@ -8,7 +9,18 @@ import {
 } from "@shared/schema";
 import { z } from "zod";
 
+// Authentication middleware
+function isAuthenticated(req: Request, res: Response, next: NextFunction) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.status(401).json({ message: "Unauthorized - Login required" });
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Set up authentication
+  setupAuth(app);
+  
   // API routes with /api prefix
   const apiRouter = express.Router();
   
@@ -187,12 +199,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
-  // Get user checklists by user ID
-  apiRouter.get("/user-checklists/:userId", async (req, res) => {
+  // Get user checklists by user ID - requires authentication
+  apiRouter.get("/user-checklists/:userId", isAuthenticated, async (req: Request, res: Response) => {
     try {
       const userId = parseInt(req.params.userId);
       if (isNaN(userId)) {
         return res.status(400).json({ message: "Invalid user ID" });
+      }
+      
+      // Make sure users can only access their own checklists
+      if (req.user && req.user.id !== userId) {
+        return res.status(403).json({ message: "Forbidden - You can only access your own checklists" });
       }
       
       const checklists = await storage.getUserChecklists(userId);
@@ -202,8 +219,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
-  // Create a new user checklist
-  apiRouter.post("/user-checklists", async (req, res) => {
+  // Create a new user checklist - requires authentication
+  apiRouter.post("/user-checklists", isAuthenticated, async (req: Request, res: Response) => {
     try {
       const parsed = insertUserChecklistSchema.safeParse(req.body);
       
@@ -238,8 +255,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
-  // Update a user checklist
-  apiRouter.patch("/user-checklists/:id", async (req, res) => {
+  // Update a user checklist - requires authentication
+  apiRouter.patch("/user-checklists/:id", isAuthenticated, async (req: Request, res: Response) => {
     try {
       const id = parseInt(req.params.id);
       if (isNaN(id)) {

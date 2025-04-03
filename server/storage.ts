@@ -10,9 +10,13 @@ import {
 
 // Storage interface with CRUD methods
 export interface IStorage {
+  // Session store
+  sessionStore: any;
+  
   // User operations
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
+  getUserByEmail(email: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
   
   // Newsletter subscriber operations
@@ -50,7 +54,14 @@ export interface IStorage {
   updateUserChecklist(id: number, completedItems: number[], notes?: string, status?: string): Promise<UserChecklist | undefined>;
 }
 
+import createMemoryStore from "memorystore";
+import session from "express-session";
+
+const MemoryStore = createMemoryStore(session);
+
 export class MemStorage implements IStorage {
+  public sessionStore: session.Store;
+  
   private users: Map<number, User>;
   private subscribers: Map<number, Subscriber>;
   private resources: Map<number, Resource>;
@@ -68,6 +79,12 @@ export class MemStorage implements IStorage {
   private userChecklistCurrentId: number;
 
   constructor() {
+    // Initialize session store
+    this.sessionStore = new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    });
+    
+    // Initialize data stores
     this.users = new Map();
     this.subscribers = new Map();
     this.resources = new Map();
@@ -101,9 +118,21 @@ export class MemStorage implements IStorage {
     );
   }
 
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    return Array.from(this.users.values()).find(
+      (user) => user.email === email,
+    );
+  }
+
   async createUser(insertUser: InsertUser): Promise<User> {
     const id = this.userCurrentId++;
-    const user: User = { ...insertUser, id };
+    // Make sure all required fields are present
+    const user: User = { 
+      ...insertUser, 
+      id,
+      genre: insertUser.genre || null,
+      createdAt: insertUser.createdAt || new Date()
+    };
     this.users.set(id, user);
     return user;
   }
