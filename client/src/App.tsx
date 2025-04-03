@@ -15,6 +15,7 @@ import LicensingCompliance from "@/pages/compliance/licensing";
 import CopyrightProtection from "@/pages/compliance/copyright";
 import DistributionStandards from "@/pages/compliance/distribution";
 import Login from "@/pages/login";
+import Register from "@/pages/register";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import { PageLoader } from "@/components/ui/loader";
@@ -71,6 +72,7 @@ function App() {
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
           <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
           <Route component={NotFound} />
         </Switch>
       </div>
