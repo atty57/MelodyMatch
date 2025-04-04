@@ -13,6 +13,11 @@ export default defineConfig({
     react(),
     runtimeErrorOverlay(),
     themePlugin(),
+  server: {
+    hmr: {
+      overlay: false
+    }
+  },
     ...(process.env.NODE_ENV !== "production" &&
     process.env.REPL_ID !== undefined
       ? [
@@ -22,11 +27,6 @@ export default defineConfig({
         ]
       : []),
   ],
-  server: {
-    hmr: {
-      overlay: false
-    }
-  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "client", "src"),
